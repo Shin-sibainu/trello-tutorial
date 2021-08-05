@@ -22,7 +22,7 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function Title() {
+export default function Title({ title }) {
   const classes = useStyle();
   const [open, setOpen] = useState(false);
   return (
@@ -31,7 +31,7 @@ export default function Title() {
         <div>
           <InputBase
             autoFocus
-            value="Todo"
+            value={title}
             inputProps={{
               className: classes.input,
             }}
@@ -49,7 +49,7 @@ export default function Title() {
             }}
             className={classes.editableTitle}
           >
-            Todo
+            {title}
           </Typography>
           <FormatListBulletedIcon />
         </div>
