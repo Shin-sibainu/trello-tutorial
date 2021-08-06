@@ -50,13 +50,27 @@ function App() {
         ...data.lists,
         [newListId]: newList,
       },
-      listIds: [...data.listIds, newListId],
+      listIds: [...data.listIds, newListId], //新しいリストのIDを付与している。だから識別できる。
+    };
+    setData(newState);
+  };
+
+  const updataListTitle = (title, listId) => {
+    const list = data.lists[listId];
+    list.title = title;
+
+    const newState = {
+      ...data,
+      lists: {
+        ...data.lists,
+        [listId]: list,
+      },
     };
     setData(newState);
   };
 
   return (
-    <StoreApi.Provider value={{ addMoreCard, addMoreList }}>
+    <StoreApi.Provider value={{ addMoreCard, addMoreList, updataListTitle }}>
       <div className={classes.root}>
         {data.listIds.map((listId) => {
           const list = data.lists[listId];
