@@ -5,12 +5,15 @@ import StoreApi from "./components/Utils/storeApi";
 import { v4 as uuid } from "uuid";
 import InputContainer from "./components/Input/InputContainer";
 import { makeStyles } from "@material-ui/core/styles";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const useStyle = makeStyles((theme) => ({
   root: {
     display: "flex",
     minHeight: "100vh",
     background: "green",
+    width: "100%",
+    overflowY: "auto",
   },
 }));
 
@@ -71,13 +74,15 @@ function App() {
 
   return (
     <StoreApi.Provider value={{ addMoreCard, addMoreList, updataListTitle }}>
-      <div className={classes.root}>
-        {data.listIds.map((listId) => {
-          const list = data.lists[listId];
-          return <List list={list} key={listId} />;
-        })}
-        <InputContainer type="list" />
-      </div>
+      <DragDropContext>
+        <div className={classes.root}>
+          {data.listIds.map((listId) => {
+            const list = data.lists[listId];
+            return <List list={list} key={listId} />;
+          })}
+          <InputContainer type="list" />
+        </div>
+      </DragDropContext>
     </StoreApi.Provider>
   );
 }
